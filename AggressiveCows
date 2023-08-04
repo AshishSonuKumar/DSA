@@ -1,0 +1,29 @@
+public static int solve(int n, int k, int[] a) {
+        if(n<k) return -1;
+        Arrays.sort(a);
+        int l=1;
+        int r=a[n-1];
+        int ans=-1;
+        while(l<=r){
+            int mid=(l+r)/2;
+            if(isSafe(a,n,k,mid)){
+                ans=mid;
+                l=mid+1;
+            } else {
+                r=mid-1;
+            }
+        }
+        return ans;
+    }
+    
+    static boolean isSafe(int a[],int n,int k, int dist){
+        int prev=a[0];
+        int cows=1;
+        for(int i=1;i<n;i++){
+            if((a[i]-prev)>=dist){
+                cows++;
+                prev=a[i];
+            }
+        }
+        return cows>=k;
+    }
